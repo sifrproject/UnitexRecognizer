@@ -37,7 +37,7 @@ private:
     filesystem::path tags_err; /**< tags.err file path (unkown words, where simple words that have been matched in the tags.ind file do not appear) */
     filesystem::path tags_err_n; /**< tags.err.n file path (number of lignes of tags.err file + CRLF) */
     filesystem::path concord_ind; /**< concord.ind file path (index of the occurrences found by Locate during the application of a grammar) */
-    filesystem::path corpus_sntmerge; /**< corpus.sntmerge file path */
+    filesystem::path concord_txt; /**< concord.txt file path (final concordance file) */
     filesystem::path concord_offsets; /**< concord offsets file path */
     filesystem::path text_tfst; /**< text.tfst file path (represents the text automaton) */
 
@@ -170,10 +170,10 @@ public:
     std::string getConcord();
 
     /**
-     * \brief Get corpus.sntmerge file path
-     * \return corpus_sntmerge
+     * \brief Get concord.txt file path
+     * \return concord_txt
      */
-    std::string getCorpusSntMerge();
+    std::string getConcordTxt();
 
     /**
      * \brief Get concord.offsets file path
@@ -247,9 +247,9 @@ public:
     void createConcord();
 
     /**
-     * \brief Create corpus.sntmerge file
+     * \brief Create concord.txt file
      */
-    void createCorpusSntMerge();
+    void createConcordTxt();
 
     /**
      * \brief Create concord.offsets file

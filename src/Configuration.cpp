@@ -26,11 +26,11 @@ void Configuration::initializeFrench() {
     this->merge_fst = "data/French/Graphs/Preprocessing/Sentence/Sentence.fst2";
     this->replace_grf = "data/French/Graphs/Preprocessing/Replace/Replace.grf";
     this->replace_fst = "data/French/Graphs/Preprocessing/Replace/Replace.fst2";
-    this->dictionary_bin = "data/French/Dela/dico.bin";
+    this->dictionary_bin = "data/French/Dela/cancer_rectum.bin";
     this->alphabet_sort = "data/French/Alphabet_sort.txt";
     this->norm_grf = "data/French/Graphs/Normalization/Norm.grf";
     this->norm_fst = "data/French/Graphs/Normalization/Norm.fst2";
-    this->locate_fst = "data/French/Graphs/annot.fst2";
+    this->locate_fst = "data/French/Graphs/locate.fst2";
 }
 
 void Configuration::initializeEnglish() {

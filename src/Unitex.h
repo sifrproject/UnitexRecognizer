@@ -135,10 +135,10 @@ public:
     std::string getConcord();
 
     /**
-     * \brief Get corpus.sntmerge file path from environment
-     * \return corpus_sntmerge
+     * \brief Get concord.txt file path from environment
+     * \return concord_txt
      */
-    std::string getCorpusSntMerge();
+    std::string getConcordTxt();
 
     /**
      * \brief Get concord.offsets file path from environment

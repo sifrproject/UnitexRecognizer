@@ -1,0 +1,23 @@
+#Unigraph
+SIZE 1188 840
+FONT Times New Roman:  10
+OFONT Arial Unicode MS:B 12
+BCOLOR 16777215
+FCOLOR 0
+ACOLOR 13487565
+SCOLOR 16711680
+CCOLOR 255
+DBOXES y
+DFRAME n
+DDATE n
+DFILE n
+DDIR n
+DRIG n
+DRST n
+FITS 100
+PORIENT L
+#
+3
+"<E>" 70 200 1 2 
+"" 300 200 0 
+"père+pere+pères+peres+papa+papas+mère+mere+mères+meres+maman+mamans+sœur+soeur+sœurs+soeurs+frère+frere+frères+freres+grand-père+grand-pere+grand-mère+grand-mere+grand-pères+grand-peres+grand-mères+grand-meres+grands-pères+grands-peres+grands-mères+grands-meres+oncle+tonton+tante+tata+oncles+tantes+tontons+tatas+grand-oncle+grands-oncles+grand-oncles+grande-tante+grandes-tantes+grand-tante+grand-tantes+grands-tantes+cousin+cousins+cousine+cousines+neveu+neveux+nièce+nièces+niece+nieces+famille+familles+familial+familiaux+familiale+familiales+fam hx+paternel+maternel+paternels+maternels" 134 334 1 1 

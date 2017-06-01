@@ -1,0 +1,51 @@
+#Unigraph
+SIZE 1276 628
+FONT Times New Roman:  10
+OFONT Arial Unicode MS:B 12
+BCOLOR 16777215
+FCOLOR 0
+ACOLOR 13487565
+SCOLOR 16711680
+CCOLOR 255
+DBOXES y
+DFRAME y
+DDATE y
+DFILE y
+DDIR n
+DRIG n
+DRST n
+FITS 100
+PORIENT L
+#
+31
+"<E>" 32 145 1 2 
+"" 1214 150 0 
+"$famille(" 65 146 1 3 
+":famille.grf" 98 146 1 17 
+"$*" 666 144 3 8 10 16 
+"<DISO>/${1}$$diso$" 759 66 1 9 
+"<CHEM>/${1}$$chem$" 758 144 1 15 
+"<DIC>/${1}$$term$" 769 235 1 11 
+"$<" 720 67 1 5 
+"$>" 840 65 1 13 
+"$<" 725 237 1 7 
+"$>" 844 237 1 12 
+"<E>/[OTHERBB=$famille$]:$term.CODE$" 894 239 1 1 
+"<E>/[OTHER(DISO)=$famille$]:$diso.CODE$" 880 65 1 1 
+"<E>/[OTHER(CHEM)=$famille$]:$chem.CODE$" 888 148 1 1 
+"$>" 843 149 1 14 
+"$<" 718 146 1 6 
+"$famille)" 176 148 1 29 
+"<WORD>+<NB>+,+\.+\:+;" 349 191 1 30 
+"<DIC>/$dico$" 137 354 1 28 
+":famille.grf" 551 358 1 22 
+"$famille(" 445 350 1 20 
+"$famille)" 673 354 1 26 
+"comme son+de son+de sa+de ses" 331 364 1 21 
+"<E>/[OTHERAA=$famille$]:$dico.CODE$" 760 349 1 1 
+"$[" 287 353 1 23 
+"$]" 711 348 1 24 
+"$<" 87 348 1 19 
+"$>" 200 353 1 25 
+"<E>" 262 142 2 30 18 
+"<E>" 493 142 2 4 29 

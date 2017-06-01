@@ -1,0 +1,34 @@
+#Unigraph
+SIZE 1188 840
+FONT Times New Roman:  10
+OFONT Arial Unicode MS:B 12
+BCOLOR 16777215
+FCOLOR 0
+ACOLOR 13487565
+SCOLOR 16711680
+CCOLOR 255
+DBOXES y
+DFRAME n
+DDATE n
+DFILE n
+DDIR n
+DRIG n
+DRST n
+FITS 100
+PORIENT L
+#
+14
+"<E>" 28 190 2 2 5 
+"" 633 167 0 
+":negation_pre.grf" 91 106 1 11 
+"<DIC>/$pre$" 384 107 1 12 
+":negation_post.grf" 337 255 1 13 
+"<DIC>/$post$" 128 260 1 8 
+"<WORD>" 246 130 1 10 
+"<WORD>" 231 294 1 9 
+"<E>" 201 259 2 9 7 
+"<E>" 311 254 2 4 8 
+"<E>" 325 108 2 3 11 
+"<E>" 225 106 2 6 10 
+"<E>/[PRENEG]:$pre.CODE$" 474 108 1 1 
+"<E>/[POSTNEG]:$post.CODE$" 511 254 1 1 

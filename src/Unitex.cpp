@@ -91,8 +91,8 @@ std::string Unitex::getConcord() {
     return this->environment.getConcord();
 }
 
-std::string Unitex::getCorpusSntMerge() {
-    return this->environment.getCorpusSntMerge();
+std::string Unitex::getConcordTxt() {
+    return this->environment.getConcordTxt();
 }
 
 std::string Unitex::getConcordOffsets() {
@@ -307,6 +307,12 @@ std::vector<std::string> Unitex::splitElements(std::string str){
 
 void Unitex::locatePattern() {
     std::ostringstream stringStream;
+    stringStream << "UnitexToolLogger Grf2Fst2 /Users/stealthxwing/CLionProjects/recognizer/data/French/Graphs/locate.grf "
+            "-y --alphabet=/Users/stealthxwing/CLionProjects/recognizer/data/French/Alphabet.txt "
+            "-o /Users/stealthxwing/CLionProjects/recognizer/data/French/Graphs/locate.fst2 "
+            "-qutf8-no-bom";
+    UnitexTool_public_run_string(stringStream.str().c_str());
+    stringStream.str(std::string());
     stringStream << "UnitexToolLogger Locate -t" << getTokenizedText()
                  << " " << filesystem::path::getcwd().str() << "/" << getLocateFst()
                  << " -a" << filesystem::path::getcwd().str() << "/" << getAlphabet()
@@ -314,103 +320,54 @@ void Unitex::locatePattern() {
                  << filesystem::path::getcwd().str() << "/" << getDictionaryBin()
                  << " -b -Y -qutf8-no-bom";
     UnitexTool_public_run_string(stringStream.str().c_str());
-
     stringStream.str(std::string());
-    stringStream << "UnitexToolLogger Concord " << getConcord()
-                 << " --uima=" << getTokenizeOffsets()
-                 << " -m " << getCorpusSntMerge()
-                 << " --output_offsets=" << getConcordOffsets()
-                 << " --TO -qutf8-no-bom";
+    stringStream << "UnitexToolLogger Concord "
+                 << "-t "
+                 << "--uima="<<getTokenizeOffsets()
+                 << " --TO -qutf8-no-bom "
+                 << getConcord();
     UnitexTool_public_run_string(stringStream.str().c_str());
 }
 
 
 std::vector<Annotation> Unitex::getAnnotations() {
-    // concord.ind reading
-    std::ifstream concord(getConcord(), std::ios::in);
-    std::vector<std::string> IDs_1;
-    std::vector<std::string> IDs_2;
-    std::vector<std::string> tokens;
-    std::vector<std::string> annotations;
+    std::ifstream concord(getConcordTxt(), std::ios::in);
+    std::vector<Annotation> annotations;
     if (concord) {
         std::string ind_contenu;
         while (concord) {
             getline(concord, ind_contenu);
-            if (ind_contenu.rfind("#M") == std::string::npos && ind_contenu.compare("") != 0) {
+            if (ind_contenu.compare("") != 0) {
                 std::vector<std::string> elements = splitElements(ind_contenu);
-                IDs_1.push_back((std::basic_string<char, std::char_traits<char>, std::allocator<char>> &&)elements.at(0));
-                IDs_2.push_back(
-                        (std::basic_string<char, std::char_traits<char>, std::allocator<char>> &&) elements.at(1));
-                tokens.push_back(split(elements.at(2), ':', 0));
-                annotations.push_back(split(elements.at(2), ':', 1));
+                Annotation annotation = Annotation(split(elements.at(2), ':', 1), split(elements.at(2), ':', 0), std::stoi(elements.at(0)), std::stoi(elements.at(1)));
+                annotations.push_back(annotation);
             }
         }
         concord.close();
     }
     else {
-        std::cerr << "A problem occurred while attempting to read concordance build file" << std::endl;
+        std::cerr << "A problem occurred while attempting to read concordance file" << std::endl;
     }
-    // concord.offsets reading
-    std::ifstream concord_offsets(getConcordOffsets(), std::ios::in);
-    std::vector<int> pos_deb;
-    std::vector<int> pos_fin;
-    if (concord_offsets) {
-        std::string off_contenu;
-        while (concord_offsets) {
-            getline(concord_offsets, off_contenu);
-            std::istringstream iss(off_contenu);
-            std::string pos;
-            int cpt = 0;
-            while (std::getline(iss, pos, ' ')) {
-                if (cpt == 0) {
-                    pos_deb.push_back(std::stoi(pos));
-                }
-                if (cpt == 1) {
-                    pos_fin.push_back(std::stoi(pos));
-                }
-                cpt += 1;
-            }
-        }
-        concord_offsets.close();
-    } else {
-        std::cerr << "A problem occurred while attempting to read concordance offsets file" << std::endl;
-    }
-    // annotations creation
-    std::vector<Annotation> annot;
-    std::string previous_ID1;
-    std::string previous_ID2;
-    int i = 0;
-    int j = 0;
-    for (std::string t : tokens) {
-        if(i > 0) {
-            previous_ID1 = IDs_1.at(i-1);
-            previous_ID2 = IDs_2.at(i-1);
-            if(IDs_1.at(i).compare(previous_ID1) != 0 && IDs_2.at(i).compare(previous_ID2) != 0) {
-                j++;
-            }
-        }
-        Annotation an = Annotation(annotations.at(i), tokens.at(i), pos_deb.at(j), pos_fin.at(j));
-        annot.push_back(an);
-        i++;
-    }
-    return annot;
+    return annotations;
 }
 
 
 std::string Unitex::getAnnotations(std::vector<Annotation> annotations) {
-    std::string annot = "termID\tfrom\tto\tterm\tlineID\n";
+    std::string result = "termID\tfrom\tto\tterm\tlineID\n";
     std::ostringstream stringStream;
     for(Annotation annotation : annotations) {
         stringStream<<annotation.getTermID()<<'\t'<<annotation.getFrom()<<'\t'<<annotation.getTo()<<'\t'<<annotation.getTerm()<<"\t1\n"<<std::endl;
-        annot += stringStream.str();
+        result += stringStream.str();
         stringStream.str(std::string());
     }
-    return annot;
+    return result;
 }
 
 
 int main(int argc, char *argv[]) {
-    std::string text = "Le docteur ne lui a pas diagnostiqué un mal de tête.\nLe docteur lui a diagnostiqué plusieurs maux de tête.";
+    //std::string text = "Le docteur ne lui a pas diagnostiqué un mal de tête.\nLe docteur lui a diagnostiqué plusieurs maux de tête.";
+    std::string text = "cancer du rectum sai";
+
     std::string language = "French";
     //std::string text = "The doctor has not diagnosed her a headache.\nThe doctor diagnosed her many headaches.";
     //std::string language = "English";

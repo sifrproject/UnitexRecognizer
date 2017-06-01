@@ -38,7 +38,7 @@ void Environment::deleteFiles() {
     this->tags_err.remove_file();
     this->tags_err_n.remove_file();
     this->concord_ind.remove_file();
-    this->corpus_sntmerge.remove_file();
+    this->concord_txt.remove_file();
     this->concord_offsets.remove_file();
     this->text_tfst.remove_file();
     deleteFileInWorkingDirectory("tokens.txt");
@@ -147,8 +147,8 @@ std::string Environment::getConcord() {
     return this->concord_ind.str();
 }
 
-std::string Environment::getCorpusSntMerge() {
-    return this->corpus_sntmerge.str();
+std::string Environment::getConcordTxt() {
+    return this->concord_txt.str();
 }
 
 std::string Environment::getConcordOffsets() {
@@ -247,9 +247,9 @@ void Environment::createConcord() {
     this->concord_ind = concord_ind;
 }
 
-void Environment::createCorpusSntMerge() {
-    std::string corpus_sntmerge = createFileInWorkingDirectory("corpus.sntmerge");
-    this->corpus_sntmerge = corpus_sntmerge;
+void Environment::createConcordTxt() {
+    std::string concord_txt = createFileInWorkingDirectory("concord.txt");
+    this->concord_txt = concord_txt;
 }
 
 void Environment::createConcordOffsets() {
@@ -268,7 +268,7 @@ void Environment::createFiles() {
     createTokenizeOffsets();
     createDictionaryFiles();
     createConcord();
-    createCorpusSntMerge();
+    createConcordTxt();
     createConcordOffsets();
     createTextTfst();
     createFileInWorkingDirectory("tokens.txt"); /**< tokens.txt file path (contains the list of all lexical units of the text) */

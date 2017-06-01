@@ -1,0 +1,78 @@
+0000000001
+-1 effects
+: 2 2 1 1 
+: 30 7 27 6 12 5 10 5 9 4 7 4 6 3 4 3 
+: 10 8 
+: 5 9 
+: 8 9 
+: 11 9 
+: 29 10 28 10 
+: 32 10 31 10 
+: 35 11 34 11 
+: 13 13 2 12 
+: 33 15 16 14 
+: 16 17 1 16 
+: 3 18 
+: 14 19 
+: 26 20 25 20 24 20 23 20 22 20 21 20 20 20 19 20 18 20 17 20 
+: 13 13 
+: 43 18 
+: 26 21 25 21 24 21 23 21 22 21 21 21 20 21 19 21 18 21 17 21 
+t 
+: 15 22 
+: 33 15 
+: 36 23 
+: 2 12 
+: 37 24 
+: 38 25 
+: 39 26 
+: 41 28 40 27 15 27 
+: 1 16 
+: 42 29 1 16 
+: 15 27 
+f 
+%<E>
+%<DISO>/$diso$
+%<CHEM>/$drug$
+%<E>/[CAUSEDBY=$drug$]:$diso.CODE$
+%dû
+%à
+%dûe
+%causé
+%par
+%causée
+%a
+%suivi
+%ont
+%la
+%prise
+%de
+%<NB>
+%an
+%ans
+%années
+%mois
+%jour
+%jours
+%heure
+%heures
+%minute
+%minutes
+%est
+%apparu
+%apparue
+%sont
+%apparus
+%apparues
+%après
+%entraîné
+%précédé
+%avant
+%l
+%'
+%appartition
+%du
+%des
+%symptômes
+%<E>/[CAUSEDBY=$drug$]$diso.CODE$
+f
