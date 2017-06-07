@@ -18,13 +18,11 @@ using namespace unitex;
 
 Unitex::Unitex(std::string text, std::string language, bool replace, bool longestOnly) {
     this->environment.initialize(text); // create intermediary files handled by Unitex
-    if(language=="English") {
+    if (language == "English") {
         this->configuration.initializeEnglish(); // configure Unitex for English text
-    }
-    else if(language=="French") {
+    } else if (language == "French") {
         this->configuration.initializeFrench(); // configure Unitex for French text
-    }
-    else {
+    } else {
         perror("Configuration error : could not recognize language");
     }
     this->replace = replace;
@@ -195,7 +193,7 @@ void Unitex::applyGraphReplace() {
     stringStream.str(std::string());
     stringStream << "UnitexToolLogger Fst2Txt -t" << getTokenizedText()
                  << " " << filesystem::path::getcwd().str() << "/" << getReplaceFst()
-                 << " -a"  << filesystem::path::getcwd().str() << "/"<< getAlphabet()
+                 << " -a" << filesystem::path::getcwd().str() << "/" << getAlphabet()
                  << " -R --input_offsets=" << getNormalizeOffsets()
                  << " --output_offsets=" << getNormalizeOffsets()
                  << " -qutf8-no-bom";
@@ -258,7 +256,7 @@ void Unitex::constructAutomaton() {
 void Unitex::preprocessing() {
     normalize();
     applyGraphMerge();
-    if(getReplace()) {
+    if (getReplace()) {
         applyGraphReplace();
     }
     tokenize();
@@ -267,36 +265,35 @@ void Unitex::preprocessing() {
 }
 
 
-std::string Unitex::split(std::string str, char separator, int number){
+std::string Unitex::split(std::string str, char separator, int number) {
     std::string section;
     std::istringstream split(str);
-    for (; number>=0; number--) {
+    for (; number >= 0; number--) {
         std::getline(split, section, separator);
     }
     return section;
 }
 
 
-
-std::vector<std::string> Unitex::splitElements(std::string str){
+std::vector<std::string> Unitex::splitElements(std::string str) {
     std::istringstream iss(str);
     std::vector<std::string> elements;
-    std::string first="";
-    std::string second="";
-    std::string third="";
-    if(iss) {
+    std::string first = "";
+    std::string second = "";
+    std::string third = "";
+    if (iss) {
         iss >> first;
     }
-    if(iss) {
+    if (iss) {
         iss >> second;
     }
     while (iss) {
         std::string sub;
         iss >> sub;
-        if(iss && sub!="\0" && third!="") {
+        if (iss && sub != "\0" && third != "") {
             third += " ";
         }
-        third+=sub;
+        third += sub;
     }
     elements.push_back(first);
     elements.push_back(second);
@@ -307,10 +304,11 @@ std::vector<std::string> Unitex::splitElements(std::string str){
 
 void Unitex::locatePattern() {
     std::ostringstream stringStream;
-    stringStream << "UnitexToolLogger Grf2Fst2 /Users/stealthxwing/CLionProjects/recognizer/data/French/Graphs/locate.grf "
-            "-y --alphabet=/Users/stealthxwing/CLionProjects/recognizer/data/French/Alphabet.txt "
-            "-o /Users/stealthxwing/CLionProjects/recognizer/data/French/Graphs/locate.fst2 "
-            "-qutf8-no-bom";
+    stringStream
+            << "UnitexToolLogger Grf2Fst2 /Users/stealthxwing/CLionProjects/recognizer/data/French/Graphs/locate.grf "
+                    "-y --alphabet=/Users/stealthxwing/CLionProjects/recognizer/data/French/Alphabet.txt "
+                    "-o /Users/stealthxwing/CLionProjects/recognizer/data/French/Graphs/locate.fst2 "
+                    "-qutf8-no-bom";
     UnitexTool_public_run_string(stringStream.str().c_str());
     stringStream.str(std::string());
     stringStream << "UnitexToolLogger Locate -t" << getTokenizedText()
@@ -323,7 +321,7 @@ void Unitex::locatePattern() {
     stringStream.str(std::string());
     stringStream << "UnitexToolLogger Concord "
                  << "-t "
-                 << "--uima="<<getTokenizeOffsets()
+                 << "--uima=" << getTokenizeOffsets()
                  << " --TO -qutf8-no-bom "
                  << getConcord();
     UnitexTool_public_run_string(stringStream.str().c_str());
@@ -339,13 +337,13 @@ std::vector<Annotation> Unitex::getAnnotations() {
             getline(concord, ind_contenu);
             if (ind_contenu.compare("") != 0) {
                 std::vector<std::string> elements = splitElements(ind_contenu);
-                Annotation annotation = Annotation(split(elements.at(2), ':', 1), split(elements.at(2), ':', 0), std::stoi(elements.at(0)), std::stoi(elements.at(1)));
+                Annotation annotation = Annotation(split(elements.at(2), ':', 1), split(elements.at(2), ':', 0),
+                                                   std::stoi(elements.at(0)), std::stoi(elements.at(1)));
                 annotations.push_back(annotation);
             }
         }
         concord.close();
-    }
-    else {
+    } else {
         std::cerr << "A problem occurred while attempting to read concordance file" << std::endl;
     }
     return annotations;
@@ -353,31 +351,107 @@ std::vector<Annotation> Unitex::getAnnotations() {
 
 
 std::string Unitex::getAnnotations(std::vector<Annotation> annotations) {
-    std::string result = "termID\tfrom\tto\tterm\tlineID\n";
+    std::string result = "termID from to term lineID";
     std::ostringstream stringStream;
-    for(Annotation annotation : annotations) {
-        stringStream<<annotation.getTermID()<<'\t'<<annotation.getFrom()<<'\t'<<annotation.getTo()<<'\t'<<annotation.getTerm()<<"\t1\n"<<std::endl;
+    for (Annotation annotation : annotations) {
+        stringStream << annotation.getTermID() << '\t' << annotation.getFrom() << '\t' << annotation.getTo() << '\t'
+                     << annotation.getTerm() << "\t1\n" << std::endl;
         result += stringStream.str();
         stringStream.str(std::string());
     }
     return result;
 }
 
+////std::string text = "Le docteur ne lui a pas diagnostiqué un mal de tête.\nLe docteur lui a diagnostiqué plusieurs maux de tête.";
+//std::string text = "cancer du rectum sai";
+//
+//std::string language = "French";
+////std::string text = "The doctor has not diagnosed her a headache.\nThe doctor diagnosed her many headaches.";
+////std::string language = "English";
+//bool replace = true;
+//bool longestOnly = false;
+//Unitex uni = Unitex(text, language, replace, longestOnly);
+//uni.preprocessing();
+//uni.locatePattern();
+//std::vector<Annotation> annotations = uni.getAnnotations();
+//std::string annotation = uni.getAnnotations(annotations);
+//std::cout<<annotation<<std::endl;
+//return 0;
+
+using namespace web;
+using namespace web::http;
+using namespace web::http::experimental::listener;
+
+#define TRACE(msg)            std::wcout << (msg) << std::endl;
+
+void handle_get(http_request const &request) {
+    TRACE(L"\nhandle GET\n");
+
+    auto http_get_vars = uri::split_query(request.request_uri().query());
+
+    std::string text = "";
+    bool replace;
+    bool longest_only;
+
+    auto text_found = http_get_vars.find(U("text"));
+    if (text_found != end(http_get_vars)) {
+        text = text_found->second;
+    }
+
+    auto replace_found = http_get_vars.find(U("replace"));
+    if (text_found != end(http_get_vars)) {
+        auto replace_text = text_found->second;
+        replace = replace_text.compare("true") == 0;
+
+    } else {
+        replace = false;
+    }
+
+    auto longest_only_found = http_get_vars.find(U("longest_only"));
+    if (longest_only_found != end(http_get_vars)) {
+        auto longest_only_text = longest_only_found->second;
+        longest_only = longest_only_text.compare("true") == 0;
+
+    } else {
+        longest_only = false;
+    }
+
+    std::cout << "Processing text=" << text << std::endl;
+
+    std::stringstream responseStream;
+
+    if (text.length() > 0) {
+        Unitex uni = Unitex(text, "French", replace, longest_only);
+
+        uni.preprocessing();
+        uni.locatePattern();
+
+        std::vector<Annotation> annotations = uni.getAnnotations();
+        std::string annotation = uni.getAnnotations(annotations);
+        responseStream << annotation << std::endl;
+    }
+
+    request.reply(status_codes::OK, responseStream.str());
+}
+
 
 int main(int argc, char *argv[]) {
-    //std::string text = "Le docteur ne lui a pas diagnostiqué un mal de tête.\nLe docteur lui a diagnostiqué plusieurs maux de tête.";
-    std::string text = "cancer du rectum sai";
+    web::http::experimental::listener::http_listener listener("http://localhost:9876/unitex");
 
-    std::string language = "French";
-    //std::string text = "The doctor has not diagnosed her a headache.\nThe doctor diagnosed her many headaches.";
-    //std::string language = "English";
-    bool replace = true;
-    bool longestOnly = false;
-    Unitex uni = Unitex(text, language, replace, longestOnly);
-    uni.preprocessing();
-    uni.locatePattern();
-    std::vector<Annotation> annotations = uni.getAnnotations();
-    std::string annotation = uni.getAnnotations(annotations);
-    std::cout<<annotation<<std::endl;
-    return 0;
+
+    listener.support(methods::GET, handle_get);
+
+    try {
+        listener
+                .open()
+                .then([&listener]() { TRACE(L"\nstarting to listen\n"); })
+                .wait();
+
+        while (true) {
+            std::this_thread::sleep_for(std::chrono::seconds(2));
+        }
+    }
+    catch (std::exception const &e) {
+        std::cout << e.what() << std::endl;
+    }
 }

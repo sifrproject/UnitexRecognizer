@@ -16,6 +16,13 @@
 #include "Configuration.h"
 #include "Annotation.h"
 
+
+#include <iostream>
+#include <cpprest/http_listener.h>
+#include <thread>
+#include <cpprest/http_listener.h>
+#include <thread>
+
 /**
  * \file Unitex.h
  * \brief Unitex/GramLab library
