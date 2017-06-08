@@ -351,7 +351,7 @@ std::vector<Annotation> Unitex::getAnnotations() {
 
 
 std::string Unitex::getAnnotations(std::vector<Annotation> annotations) {
-    std::string result = "termID from to term lineID\n";
+    std::string result = "";
     std::ostringstream stringStream;
 
     for (std::vector<Annotation>::iterator it = annotations.begin(); it != annotations.end(); ++it) {
