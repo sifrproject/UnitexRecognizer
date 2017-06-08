@@ -22,101 +22,117 @@ class session
         : public std::enable_shared_from_this<session> {
 
 private:
-    tcp::socket socket;
+    tcp::socket socket_;
     asio::streambuf buffer;
 
 public:
-    explicit session(tcp::socket socket)
-            : socket(std::move(socket)) {
+    explicit session(asio::io_service& io_service)
+            : socket_(io_service) {
+    }
+
+    tcp::socket& socket()
+    {
+        return socket_;
     }
 
     void start() {
-        process_request();
+        asio::async_read_until(socket_, buffer, '\n',boost::bind(&session::handle_read, this,
+                                                                 asio::placeholders::error,
+                                                                 asio::placeholders::bytes_transferred));
     }
 
 private:
-    void process_request() {
-        auto self(shared_from_this());
-        asio::async_read_until(socket, buffer, '\n',boost::bind(&session::handle_read, this,
-                                                                asio::placeholders::error,
-                                                                asio::placeholders::bytes_transferred));
-    }
 
-    void handle_read(std::error_code ec, std::size_t length){
-        std::istream is(&buffer);
-        std::string result_line;
-        std::getline(is, result_line);
+    void handle_read(const asio::error_code& error,
+                     size_t bytes_transferred){
+        if(!error) {
+            std::istream is(&buffer);
+            std::string result_line;
+            std::getline(is, result_line);
+            if (result_line.length() >0 && result_line.at(0) == 'A') {
+                bool replace = false;
+                bool longest_only = false;
+                if (result_line.at(1) == 'Y') {
+                    longest_only = true;
+                }
+                if (result_line.at(2) == 'Y') {
+                    replace = true;
+                }
 
-        if (result_line.at(0) == 'A' && !ec) {
-            bool replace = false;
-            bool longest_only = false;
-            if (result_line.at(1) == 'Y') {
-                longest_only = true;
-            }
-            if (result_line.at(2) == 'Y') {
-                replace = true;
-            }
+                std::string text = result_line.substr(4);
 
-            std::string text = result_line.substr(4);
+                if (text.length() > 0) {
+                    Unitex uni = Unitex(text, "French", replace, longest_only);
 
-            if (text.length() > 0) {
-                Unitex uni = Unitex(text, "French", replace, longest_only);
+                    uni.preprocessing();
+                    uni.locatePattern();
 
-                uni.preprocessing();
-                uni.locatePattern();
+                    std::vector<Annotation> annotations = uni.getAnnotations();
+                    std::string annotation = uni.getAnnotations(annotations);
 
-                std::vector<Annotation> annotations = uni.getAnnotations();
-                std::string annotation = uni.getAnnotations(annotations);
+                    do_write(annotation);
 
-                do_write(annotation);
-
+                } else {
+                    do_write("");
+                }
             } else {
                 do_write("");
             }
+            socket_.close();
         } else {
-            do_write("");
+            delete(this);
         }
-        socket.close();
     }
 
     void do_write(std::string const & value) {
-        auto self(shared_from_this());
-        asio::async_write(socket, asio::buffer(value.data(), value.length()),
+        asio::async_write(socket_, asio::buffer(value.data(), value.length()),
                           boost::bind(&session::handle_write, this,
-                                      asio::placeholders::error,
-                                      asio::placeholders::bytes_transferred));
+                                      asio::placeholders::error));
     }
 
-    void handle_write(std::error_code ec, std::size_t length){}
+    void handle_write(const asio::error_code& error){
+        if(error){
+            delete this;
+        }
+
+    }
 
 };
 
 class server {
 public:
     server(asio::io_service &io_service, unsigned short port)
-            : acceptor_(io_service, tcp::endpoint(tcp::v4(), port)),
-              socket_(io_service) {
+            : acceptor(io_service, tcp::endpoint(tcp::v4(), port)),
+              io_service(io_service) {
         do_accept();
     }
 
 private:
     void do_accept() {
-        acceptor_.async_accept(socket_,boost::bind(&server::handle_accept, this,
-                                                   asio::placeholders::error));
+        auto* new_session = new session(io_service);
+        acceptor.async_accept(new_session->socket(),
+                               boost::bind(&server::handle_accept, this, new_session,
+                                           asio::placeholders::error));
     }
 
-    void handle_accept(const asio::error_code& ec){
-        if (!ec) {
-            std::make_shared<session>(std::move(socket_))->start();
+    void handle_accept(session* new_session,
+                       const asio::error_code& error)
+    {
+        if (!error)
+        {
+            new_session->start();
+        }
+        else
+        {
+            delete new_session;
         }
 
         do_accept();
-
     }
 
 
-    tcp::acceptor acceptor_;
-    tcp::socket socket_;
+    tcp::acceptor acceptor;
+    asio::io_service& io_service;
 };
 
 
