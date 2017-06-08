@@ -360,8 +360,5 @@ std::string Unitex::getAnnotations(std::vector<Annotation> annotations) {
         result += stringStream.str();
         stringStream.str(std::string());
     }
-    for (Annotation annotation : annotations) {
-
-    }
     return result;
 }
