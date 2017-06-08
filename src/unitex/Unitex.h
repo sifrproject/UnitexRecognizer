@@ -6,7 +6,6 @@
 #include <sstream>
 #include <string>
 #include <fstream>
-#include <codecvt>
 
 #include <UnitexTool.h>
 #include <filesystem/path.h>
