@@ -18,10 +18,6 @@
 
 
 #include <iostream>
-#include <cpprest/http_listener.h>
-#include <thread>
-#include <cpprest/http_listener.h>
-#include <thread>
 
 /**
  * \file Unitex.h

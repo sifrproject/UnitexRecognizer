@@ -351,7 +351,7 @@ std::vector<Annotation> Unitex::getAnnotations() {
 
 
 std::string Unitex::getAnnotations(std::vector<Annotation> annotations) {
-    std::string result = "termID from to term lineID";
+    std::string result = "termID from to term lineID\n";
     std::ostringstream stringStream;
     for (Annotation annotation : annotations) {
         stringStream << annotation.getTermID() << '\t' << annotation.getFrom() << '\t' << annotation.getTo() << '\t'
@@ -360,98 +360,4 @@ std::string Unitex::getAnnotations(std::vector<Annotation> annotations) {
         stringStream.str(std::string());
     }
     return result;
-}
-
-////std::string text = "Le docteur ne lui a pas diagnostiqué un mal de tête.\nLe docteur lui a diagnostiqué plusieurs maux de tête.";
-//std::string text = "cancer du rectum sai";
-//
-//std::string language = "French";
-////std::string text = "The doctor has not diagnosed her a headache.\nThe doctor diagnosed her many headaches.";
-////std::string language = "English";
-//bool replace = true;
-//bool longestOnly = false;
-//Unitex uni = Unitex(text, language, replace, longestOnly);
-//uni.preprocessing();
-//uni.locatePattern();
-//std::vector<Annotation> annotations = uni.getAnnotations();
-//std::string annotation = uni.getAnnotations(annotations);
-//std::cout<<annotation<<std::endl;
-//return 0;
-
-using namespace web;
-using namespace web::http;
-using namespace web::http::experimental::listener;
-
-#define TRACE(msg)            std::wcout << (msg) << std::endl;
-
-void handle_get(http_request const &request) {
-    TRACE(L"\nhandle GET\n");
-
-    auto http_get_vars = uri::split_query(request.request_uri().query());
-
-    std::string text = "";
-    bool replace;
-    bool longest_only;
-
-    auto text_found = http_get_vars.find(U("text"));
-    if (text_found != end(http_get_vars)) {
-        text = text_found->second;
-    }
-
-    auto replace_found = http_get_vars.find(U("replace"));
-    if (text_found != end(http_get_vars)) {
-        auto replace_text = text_found->second;
-        replace = replace_text.compare("true") == 0;
-
-    } else {
-        replace = false;
-    }
-
-    auto longest_only_found = http_get_vars.find(U("longest_only"));
-    if (longest_only_found != end(http_get_vars)) {
-        auto longest_only_text = longest_only_found->second;
-        longest_only = longest_only_text.compare("true") == 0;
-
-    } else {
-        longest_only = false;
-    }
-
-    std::cout << "Processing text=" << text << std::endl;
-
-    std::stringstream responseStream;
-
-    if (text.length() > 0) {
-        Unitex uni = Unitex(text, "French", replace, longest_only);
-
-        uni.preprocessing();
-        uni.locatePattern();
-
-        std::vector<Annotation> annotations = uni.getAnnotations();
-        std::string annotation = uni.getAnnotations(annotations);
-        responseStream << annotation << std::endl;
-    }
-
-    request.reply(status_codes::OK, responseStream.str());
-}
-
-
-int main(int argc, char *argv[]) {
-    web::http::experimental::listener::http_listener listener("http://localhost:9876/unitex");
-
-
-    listener.support(methods::GET, handle_get);
-
-    try {
-        listener
-                .open()
-                .then([&listener]() { TRACE(L"\nstarting to listen\n"); })
-                .wait();
-
-        while (true) {
-            std::this_thread::sleep_for(std::chrono::seconds(2));
-        }
-    }
-    catch (std::exception const &e) {
-        std::cout << e.what() << std::endl;
-    }
 }
