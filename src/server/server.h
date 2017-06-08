@@ -1,5 +1,3 @@
-oid handle_accept(session* new_session,
-                  const asio::error_code& error)
 //
 // Created by Andon Tchechmedjiev on 08/06/2017.
 //
