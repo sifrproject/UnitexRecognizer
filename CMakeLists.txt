@@ -29,6 +29,6 @@ set(SOURCE_FILES src/unitex/Unitex.cpp
 
 add_executable(recognizer ${SOURCE_FILES} src/unitex/Configuration.cpp src/unitex/Configuration.h)
 target_link_libraries(recognizer
-        Boost::boost
+        ${Boost_LIBRARIES}
         pthread
         unitex)
