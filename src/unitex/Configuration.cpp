@@ -26,11 +26,12 @@ void Configuration::initializeFrench() {
     this->merge_fst = "data/French/Graphs/Preprocessing/Sentence/Sentence.fst2";
     this->replace_grf = "data/French/Graphs/Preprocessing/Replace/Replace.grf";
     this->replace_fst = "data/French/Graphs/Preprocessing/Replace/Replace.fst2";
-    this->dictionary_bin = "data/French/Dela/cancer_rectum.bin";
+    this->dictionary_bin = "data/French/Dela/dictionary.bin";
     this->alphabet_sort = "data/French/Alphabet_sort.txt";
     this->norm_grf = "data/French/Graphs/Normalization/Norm.grf";
     this->norm_fst = "data/French/Graphs/Normalization/Norm.fst2";
     this->locate_fst = "data/French/Graphs/locate.fst2";
+    this->locate_grf = "data/French/Graphs/locate.grf";
 }
 
 void Configuration::initializeEnglish() {
@@ -44,6 +45,7 @@ void Configuration::initializeEnglish() {
     this->alphabet_sort = "data/English/Alphabet_sort.txt";
     this->norm_grf = "data/English/Graphs/Normalization/Norm.grf";
     this->norm_fst = "data/English/Graphs/Normalization/Norm.fst2";
+    this->locate_grf = "data/English/Graphs/locate.grf";
     this->locate_fst = "data/English/Graphs/annot.fst2";
 }
 
@@ -89,4 +91,8 @@ std::string Configuration::getNormFst() {
 
 std::string Configuration::getLocateFst() {
     return this->locate_fst;
+}
+
+std::string Configuration::getLocateGrf(){
+    return this->locate_grf;
 }

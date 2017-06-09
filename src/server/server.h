@@ -60,6 +60,9 @@ private:
                 }
 
                 std::string text = result_line.substr(4);
+                if(text.at(text.length()-1)=='\r'){
+                    text = text.substr(0,text.length()-1);
+                }
 
                 if (text.length() > 0) {
                     Unitex uni = Unitex(text, "French", replace, longest_only);

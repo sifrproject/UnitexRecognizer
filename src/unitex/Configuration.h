@@ -31,6 +31,7 @@ private:
     std::string alphabet_sort; /**< Alphabet_sort.txt file path (sorting priorities of the letters of a language) */
     std::string norm_grf; /**< Norm.grf file path (normalization grammar) */
     std::string norm_fst; /**< Norm.fst2 file path */
+    std::string locate_grf; /**< annot.fst2 file path (to locate pattern) */
     std::string locate_fst; /**< annot.fst2 file path (to locate pattern) */
 
 public:
@@ -108,6 +109,12 @@ public:
      * \return norm_fst
      */
     std::string getNormFst();
+
+    /**
+     * Get locate.grf file path
+     * \return locate_grf
+     */
+    std::string getLocateGrf();
 
     /**
      * Get annot.fst2 file path

@@ -215,10 +215,16 @@ public:
     std::string getNormFst();
 
     /**
-     * Get annot.fst2 file path from configuration
+     * Get locate.fst2 file path from configuration
      * \return locate_fst
      */
     std::string getLocateFst();
+
+    /**
+    * Get locate.grf file path from configuration
+    * \return locate_grf
+    */
+    std::string getLocateGrf();
 
     /**
      * \brief Normalize text
