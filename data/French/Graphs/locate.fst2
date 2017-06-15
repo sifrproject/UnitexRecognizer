@@ -1,93 +1,14 @@
-0000000003
+0000000001
 -1 locate
-: -2 2 4 1 
-: 1 3 
+: 4 1 
+: 1 2 
+: 3 3 
+: 2 4 
 t 
-: 3 4 
-: 2 2 
-f 
--2 Pharmacogenomics::pharmacogenomics
-: -3 1 
-t 
-f 
--3 Pharmacogenomics::Effects::effects
-: 6 2 5 1 
-: 34 7 31 6 16 5 14 5 13 4 11 4 10 3 8 3 
-: 14 8 
-: 9 9 
-: 12 9 
-: 15 9 
-: 33 10 32 10 
-: 36 10 35 10 
-: 39 11 38 11 
-: 17 13 6 12 
-: 37 15 20 14 
-: 20 17 5 16 
-: 7 18 
-: 18 19 
-: 30 20 29 20 28 20 27 20 26 20 25 20 24 20 23 20 22 20 21 20 
-: 17 13 
-: 47 18 
-: 30 21 29 21 28 21 27 21 26 21 25 21 24 21 23 21 22 21 21 21 
-t 
-: 19 22 
-: 37 15 
-: 40 23 
-: 6 12 
-: 41 24 
-: 42 25 
-: 43 26 
-: 45 28 44 27 19 27 
-: 5 16 
-: 46 29 5 16 
-: 19 27 
 f 
 %<E>
 %<DIC>/$term$
 %<E>/:$term.CODE$
 %$>
 %$<
-%<DISO>/$diso$
-%<CHEM>/$drug$
-%<E>/[CAUSEDBY=$drug$]:$diso.CODE$
-%dû
-%à
-%dûe
-%causé
-%par
-%causée
-%a
-%suivi
-%ont
-%la
-%prise
-%de
-%<NB>
-%an
-%ans
-%années
-%mois
-%jour
-%jours
-%heure
-%heures
-%minute
-%minutes
-%est
-%apparu
-%apparue
-%sont
-%apparus
-%apparues
-%après
-%entraîné
-%précédé
-%avant
-%l
-%'
-%appartition
-%du
-%des
-%symptômes
-%<E>/[CAUSEDBY=$drug$]$diso.CODE$
 f
