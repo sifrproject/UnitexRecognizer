@@ -1,0 +1,32 @@
+#Unigraph
+SIZE 1188 840
+FONT Times New Roman:  10
+OFONT Arial Unicode MS:B 12
+BCOLOR 16777215
+FCOLOR 0
+ACOLOR 13487565
+SCOLOR 16711680
+CCOLOR 255
+DBOXES y
+DFRAME n
+DDATE n
+DFILE n
+DDIR n
+DRIG n
+DRST n
+FITS 100
+PORIENT L
+#
+12
+"<E>" 52 174 1 2 
+"" 914 174 0 
+":hypo_pre.grf" 122 174 1 6 
+"<DIC>/$pre$" 661 174 1 7 
+"<WORD>" 473 219 1 5 
+"<E>" 563 174 2 6 11 
+"<E>" 238 174 2 5 8 
+"<E>/[HYPOTHETICAL]:$pre.CODE$" 734 174 1 1 
+"$![" 274 219 1 10 
+"$]" 441 219 1 4 
+":hypo_termin.grf" 318 219 1 9 
+"$*" 614 174 1 3 

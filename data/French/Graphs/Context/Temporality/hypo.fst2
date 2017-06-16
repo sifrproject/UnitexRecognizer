@@ -1,0 +1,67 @@
+0000000003
+-1 hypo
+: -2 1 
+: 6 3 4 2 
+: -3 4 
+: 1 5 
+: 5 6 
+: 3 7 
+: 2 1 
+t 
+f 
+-2 hypo_pre
+: 22 6 16 5 12 4 11 3 9 2 7 1 
+: 8 6 
+: 11 6 10 6 
+: 13 6 
+t 15 6 14 6 
+: 19 6 17 7 
+t 
+: 18 8 
+t 20 9 
+: 21 6 
+f 
+-3 hypo_termin
+: 33 2 32 2 26 4 24 3 23 2 11 1 
+: 28 5 
+t 
+: 25 2 
+: 27 3 
+: 30 6 29 2 
+: 31 2 
+f 
+%<E>
+%<DIC>/$pre$
+%<WORD>
+%<E>/[HYPOTHETICAL]:$pre.CODE$
+%$![0
+%$]
+%$*
+%comme
+%requis
+%revenir
+%pour
+%à
+%si
+%condition
+%négatif
+%négative
+%devrait
+%-
+%il
+%elle
+%y
+%avoir
+%retourne
+%car
+%parce
+%que
+%du
+%fait
+%cause
+%de
+%d
+%'
+%depuis
+%dès
+f

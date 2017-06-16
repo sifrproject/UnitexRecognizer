@@ -17,7 +17,8 @@ DRST n
 FITS 100
 PORIENT L
 #
-3
+4
 "<E>" 70 200 1 2 
-"" 300 200 0 
-"malgré" 164 182 1 1 
+"" 395 200 0 
+"poudre+comprimé+gélule+sirop/$pos$" 174 200 1 3 
+"<E>/$pos$" 286 200 1 1 

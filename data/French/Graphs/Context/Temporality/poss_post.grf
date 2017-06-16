@@ -1,0 +1,23 @@
+#Unigraph
+SIZE 1188 840
+FONT Times New Roman:  10
+OFONT Arial Unicode MS:B 12
+BCOLOR 16777215
+FCOLOR 0
+ACOLOR 13487565
+SCOLOR 16711680
+CCOLOR 255
+DBOXES y
+DFRAME n
+DDATE n
+DFILE n
+DDIR n
+DRIG n
+DRST n
+FITS 100
+PORIENT L
+#
+3
+"<E>" 70 200 1 2 
+"" 388 195 0 
+"être écarté+être écartée+être écartés+être écartées+être éliminé+être éliminée+être éliminés+être éliminées+être infirmé+être infirmée+être infirmés+être infirmées+être exclu+être exclue+être exclus+être exclues+étant exclue+étant exclu+étant exclues+étant exclus+étant écarté+étant écartée+étant écartés+étant écartées+étant éliminé+étant éliminée+étant éliminés+étant éliminées+peut être écarté+peut être exclu+peut être exclue+peut être exclues+peut être exclus+peut être écartée+peut être écartés+peut être écartées+peut être éliminé+peut être éliminée+peut être éliminés+peut être éliminées+peut être écarté pour+peut être éliminé pour+peut être exclu pour+peut être écartée pour+peut être éliminée pour+peut être exclue pour+peuvent être écartés pour+peuvent être éliminés pour+peuvent être exclus pour+peuvent être écartées pour+peuvent être éliminées pour+peuvent être exclues pour+pourrait être écarté+pourrait être écartée+pourraient être écartés+pourraient être écartées+pourrait être éliminé+pourrait être éliminée+pourraient être éliminés+pourraient être éliminées+pourrait être exclu+pourrait être exclue+pourraient être exclus+pourraient être exclues+n'a pas exclu+n'a pas écarté+n'a pas éliminé+est à exclure+est à écarter+est à éliminer+pas été exclue+pas été exclu+pas été exclus+pas été exclues+pas exclue+pas exclu+pas exclus+pas exclues+pas écarté+pas écartée+pas écartées+pas écartés+pas éliminé+pas éliminés+pas éliminée+pas éliminées+pas été écartée+pas été écartées+pas été écarté+pas été écartés+pas été éliminée+pas été éliminées+pas été éliminé+pas été éliminés+sera écartée+sera écarté+sera éliminée+sera éliminé+seront écartées+seront écartés+seront éliminées+seront éliminés" 175 390 1 1 

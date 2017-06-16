@@ -1,8 +1,43 @@
 0000000001
--1 medicament
+-1 drug
 : 1 1 
+: 21 2 
+: 22 6 20 5 19 5 18 5 17 5 15 4 11 3 
+: 2 7 
+: 7 8 6 8 5 8 4 8 3 8 
+: 15 4 11 3 
+: 8 9 
+: 12 10 
+: 16 11 
 t 
+: 13 12 
+: 22 6 
+: 10 13 9 13 
+: 14 14 
+: 22 6 20 15 19 15 18 15 17 15 15 4 
+: 15 4 
 f 
 %<E>
-%<CHEM>
+%<CHEM>/$chem$
+%<NB>
+%poudre/$galen$
+%sirop/$galen$
+%comprimé/$galen$
+%gélule/$galen$
+%suppositoire/$galen$
+%<E>/[DRUG,pos=$nb$$qt$,galen=$galen$]:$chem.CODE$
+%mL/$qt$
+%mg/$qt$
+%$nb(
+%$nb)
+%$qt(
+%$qt)
+%$galen(
+%$galen)
+%<WORD>
+%,
+%:
+%;
+%$[0
+%$]
 f

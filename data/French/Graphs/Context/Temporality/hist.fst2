@@ -1,0 +1,54 @@
+0000000004
+-1 hist
+: 7 1 
+: -4 2 
+: 5 3 
+: -2 4 
+: 6 6 4 5 
+: -3 7 
+: 1 8 
+: 5 9 
+: 3 10 
+: 2 4 
+t 
+f 
+-2 hist_pre
+: 10 3 9 2 8 1 
+t 
+t 11 1 
+t 12 1 
+f 
+-3 hist_termin
+: 13 1 
+: 14 2 
+: 15 3 
+: 16 4 
+t 
+f 
+-4 hist_pseudo
+: 18 2 17 1 
+: 14 3 
+t 
+: 15 4 
+: 9 2 
+f 
+%<E>
+%<DIC>/$dic$
+%<WORD>
+%<E>/[HISTORICAL]:$dic.CODE$
+%$![0
+%$]
+%$*
+%$![1
+%histoire
+%antécédent
+%antécédents
+%médical
+%médicaux
+%service
+%d
+%'
+%urgences
+%peu
+%malgré
+f

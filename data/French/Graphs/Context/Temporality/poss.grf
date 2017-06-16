@@ -1,0 +1,37 @@
+#Unigraph
+SIZE 1188 840
+FONT Times New Roman:  10
+OFONT Arial Unicode MS:B 12
+BCOLOR 16777215
+FCOLOR 0
+ACOLOR 13487565
+SCOLOR 16711680
+CCOLOR 255
+DBOXES y
+DFRAME n
+DDATE n
+DFILE n
+DDIR n
+DRIG n
+DRST n
+FITS 100
+PORIENT L
+#
+17
+"<E>" 51 260 2 2 9 
+"" 675 245 0 
+":poss_pre.grf" 102 198 1 6 
+"<DIC>/$pre$" 452 198 1 7 
+"<WORD>" 248 229 1 5 
+"<E>" 322 198 2 6 8 
+"<E>" 218 198 2 5 4 
+"<E>/[POSSIBLE]:$pre.CODE$" 595 198 1 1 
+"$*" 388 198 1 3 
+"<DIC>/$post$" 121 300 1 15 
+"<E>" 279 300 2 11 12 
+"<E>" 410 300 2 13 10 
+"<WORD>" 321 339 1 11 
+":poss_post.grf" 457 300 1 16 
+"<E>/[POSSIBLE]:$post.CODE$" 598 300 1 1 
+"$[" 236 300 1 10 
+"$]" 566 300 1 14 
