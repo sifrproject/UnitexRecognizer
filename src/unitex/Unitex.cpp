@@ -308,16 +308,10 @@ std::vector<std::string> Unitex::splitElements(std::string str) {
 
 void Unitex::locatePattern() {
     std::ostringstream stringStream;
-
     stringStream << "UnitexToolLogger Grf2Fst2 " << filesystem::path::getcwd().str() << "/" << getLocateGrf()
                  << " -y --alphabet=" << filesystem::path::getcwd().str() << "/" << getAlphabet()
                  << " -o " << filesystem::path::getcwd().str() << "/" << getLocateFst()
                  << " -qutf8-no-bom";
-//    stringStream
-//            << "UnitexToolLogger Grf2Fst2 /Users/stealthxwing/CLionProjects/recognizer/data/French/Graphs/locate.grf "
-//                    "-y --alphabet=/Users/stealthxwing/CLionProjects/recognizer/data/French/Alphabet.txt "
-//                    "-o /Users/stealthxwing/CLionProjects/recognizer/data/French/Graphs/locate.fst2 "
-//                    "-qutf8-no-bom";
     UnitexTool_public_run_string(stringStream.str().c_str());
     std::cerr << stringStream.str() << std::endl;
     stringStream.str(std::string());
